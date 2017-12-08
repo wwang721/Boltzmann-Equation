@@ -14,25 +14,25 @@ int main()
 		cout<<"can't open file\n";
 		exit(1);
 	}
-	cout<<"1.ÇëÊäÈëxÖá×î´óÖµºÍyÖá×î´óÖµ"<<endl;
+	cout<<"1.è¯·è¾“å…¥xè½´æœ€å¤§å€¼å’Œyè½´æœ€å¤§å€¼"<<endl;
 	cin>>xmax>>ymax;
-	cout<<"2.È·¶¨Ô­µãÎ»ÖÃ£¬°´¿Õ¸ñ¼ü¼ÇÂ¼Ô­µã×ø±ê;\n";
+	cout<<"2.ç¡®å®šåŸç‚¹ä½ç½®ï¼ŒæŒ‰ç©ºæ ¼é”®è®°å½•åŸç‚¹åæ ‡;\n";
 	getch();
 	GetCursorPos(&pt); 
 	x0=pt.x;
 	y0=pt.y;
-	cout<<"Finished...\n3.È·¶¨xÖá×î´óÖµµãÎ»ÖÃ£¬°´¿Õ¸ñ¼ü¼ÇÂ¼¸Ãµã×ø±ê;\n";
+	cout<<"Finished...\n3.ç¡®å®šxè½´æœ€å¤§å€¼ç‚¹ä½ç½®ï¼ŒæŒ‰ç©ºæ ¼é”®è®°å½•è¯¥ç‚¹åæ ‡;\n";
 	getch();
 	GetCursorPos(&pt); 
 	xm=pt.x;
-	cout<<"Finished...\n4.È·¶¨yÖá×î´óÖµµãÎ»ÖÃ£¬°´¿Õ¸ñ¼ü¼ÇÂ¼¸Ãµã×ø±ê;\n";
+	cout<<"Finished...\n4.ç¡®å®šyè½´æœ€å¤§å€¼ç‚¹ä½ç½®ï¼ŒæŒ‰ç©ºæ ¼é”®è®°å½•è¯¥ç‚¹åæ ‡;\n";
 	getch();
 	GetCursorPos(&pt); 
 	ym=pt.y;
-	cout<<"Finished...\n°´ÈÎÒâ¼ü¼ÌĞø:"<<endl;
+	cout<<"Finished...\næŒ‰ä»»æ„é”®ç»§ç»­:"<<endl;
 	getch();
 	system("cls");
-	cout<<"Çë°´¿Õ¸ñ¼ÇÂ¼µã×ø±ê:"<<endl;
+	cout<<"è¯·æŒ‰ç©ºæ ¼è®°å½•ç‚¹åæ ‡:"<<endl;
 	while(1)
 	{
 		getch();
