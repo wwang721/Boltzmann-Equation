@@ -1,0 +1,100 @@
+\documentclass{article}
+\usepackage{ctex}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{upgreek}
+\usepackage{graphicx}
+\usepackage{color}
+\geometry{a4paper,centering,scale=0.8}
+\definecolor{hyperreference}{rgb}{0,0,1}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+\begin{document}\zihao{4}
+\noindent 已知$N_m$是一个和$x$、$v_x$以及时间$t$有关的函数，即$N_m(x,v_x,t)$。此处讨论的问题与时间无关，故可将其看做一个二元函数$N_m(x,v_x)$，且$N_m$满足方程：
+\begin{equation}\label{1}
+v_x\frac{\partial N_m}{\partial x}=-\frac{N_m-N_m^0}{\uptau_{th}^{'}}
+\end{equation}
+
+令$\delta n_m=N_m-N_m^0$,可得：
+\begin{equation}\label{2}
+v_x\frac{\partial \delta n_m}{\partial x}=-\frac{\delta n_m}{\uptau_c}
+\end{equation}
+通过解这个偏微分方程\eqref{2}得：
+\begin{equation}\label{3}
+\delta n_m(x,v_x>0)=c_1\exp\begin{pmatrix}-\dfrac{1}{|v_x\uptau_c|}x\end{pmatrix}
+\end{equation}
+\begin{equation}\label{4}
+\delta n_m(x,v_x<0)=c_2\exp\begin{pmatrix}-\dfrac{1}{|v_x\uptau_c|}(d-x)\end{pmatrix}
+\end{equation}
+则:
+\begin{equation}\label{5}
+\begin{aligned}
+\overline{n}_m(x)&=\frac{1}{(2\pi)^3}\int n_m\mathrm{d}v_x\\
+&=\int_0^{10^6}\begin{bmatrix}
+c_1\exp\begin{pmatrix}-\dfrac{1}{v_x\uptau_c}x\end{pmatrix}+c_2\exp\begin{pmatrix}-\dfrac{1}{v_x\uptau_c}(d-x)\end{pmatrix}
+\end{bmatrix}\mathrm{d}v_x
+\end{aligned}
+\end{equation}
+故当$x=0$时，有$\overline{n}_m(0)=n_0$,即：
+\begin{equation}\label{6}
+\int_0^{10^6}\begin{bmatrix}c_1+c_2\exp\begin{pmatrix}\dfrac{d}{v_x\uptau_c}\end{pmatrix}\end{bmatrix}\mathrm{d}v_x=n_0
+\end{equation}
+当$x=d$时，有$\overline{n}_m(d)=0$,即：
+\begin{equation}\label{7}
+\int_0^{10^6}\begin{bmatrix}c_1\exp\begin{pmatrix}-\dfrac{d}{v_x\uptau_c}\end{pmatrix}+c_2\end{bmatrix}\mathrm{d}v_x=0
+\end{equation}
+联立式\eqref{6}及式\eqref{7}可得：
+\begin{equation}\label{8}
+\left\{
+\begin{aligned}
+c_1\int_0^{10^6}\mathrm{d}v_x+c_2\int_0^{10^6}\exp\begin{pmatrix}-\dfrac{d}{v_x\uptau_c}\end{pmatrix}\mathrm{d}v_x=n_0\\
+c_1\int_0^{10^6}\exp\begin{pmatrix}-\dfrac{d}{v_x\uptau_c}\end{pmatrix}\mathrm{d}v_x+c_2\int_0^{10^6}\mathrm{d}v_x=0\\
+\end{aligned}\right.
+\end{equation}
+令：
+\[
+\begin{aligned}
+	a=\int_0^{10^6}\mathrm{d}v_x&\text{,}
+	&b=\int_0^{10^6}\exp\begin{pmatrix}-\dfrac{d}{v_x\uptau_c}\end{pmatrix}\mathrm{d}v_x
+\end{aligned}
+\]
+故可得：
+\begin{equation}\label{9}
+\left\{
+\begin{aligned}
+ac_1+bc_2=n_0\\
+bc_1+ac_2=0\\
+\end{aligned}\right.
+\end{equation}
+则：
+\begin{equation}\label{10}
+\begin{aligned}
+	&c1=\dfrac{\begin{vmatrix}n_0&b\\0&a\end{vmatrix}}{\begin{vmatrix}a&b\\b&a\end{vmatrix}}=\dfrac{a}{a^2-b^2}n_0\text{,}&\text{}
+	&c2=\dfrac{\begin{vmatrix}a&n_0\\b&0\end{vmatrix}}{\begin{vmatrix}a&b\\b&a\end{vmatrix}}=-\dfrac{b}{a^2-b^2}n_0
+\end{aligned}
+\end{equation}
+将式\eqref{10}代回式\eqref{5}可得$\overline{n}_m(x)$表达式.
+
+同理可得：
+\begin{equation}\label{11}
+j_m(x)=\int_0^{10^6}v_x\delta n_m\mathrm{d}v_x
+\end{equation}
+所得表达式过于复杂，这里不列出，可见\href{run:./Ultimate.nb}{\color{hyperreference}{Mathematica}}中所示。
+
+又由文献可知：
+$
+R_{nl}\propto\tfrac{j_m(d)}{n_0}
+$，
+故$C=-2DK$,其中$K$为比例系数，则：
+\begin{equation}\label{12}
+j_m(x)=\dfrac{C}{K}\dfrac{n_0}{\lambda}\dfrac{\exp(x/\lambda)}{1-\exp{(2x/\lambda)}}
+\end{equation}
+由第一次计算结果可知$\lambda\approx9.4\mu m$，而$C\approx-4.2\times10^{-4}\Omega$
+，将其绘制成曲线与这次所得$j_m(x)$曲线进行比较，如下图所示：
+\begin{figure}[ht]
+\centering
+\includegraphics[width=8cm]{1.png}
+\caption{图中蓝色曲线为本次计算所得曲线，黄色曲线为第一次模拟所得}
+\end{figure}
+
+调节参数可得比例系数$K\approx1.6\times10^{-4}\Omega\cdot s/m^2$。
+\end{document}
