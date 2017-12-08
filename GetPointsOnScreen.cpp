@@ -1,3 +1,4 @@
+//This program is aimed to get the relative x and y coordinate of the points on the computer screen.
 #include<iostream>
 #include"windows.h"
 #include"conio.h"
