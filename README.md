@@ -1,5 +1,4 @@
-# Hellow-World
-Hellow, everyone.
+# Diffusion Equation And Boltzmann Equation
 
 I'm a college student majoring in physics.
 
