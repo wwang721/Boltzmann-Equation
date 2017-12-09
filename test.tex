@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage{ctex}
+\usepackage{upgreek}
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{a4paper,centering,scale=0.8}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+\begin{document}\zihao{-4}
+	\noindent 将上一次的方程增加一个散射项，可得：
+	\begin{equation}\label{eq:1}
+		v_x\frac{\partial N_m(x,v_x)}{\partial x}=-\frac{N_m(x,v_x)-\overline{N}_m(x)}{\uptau_m}-\frac{N_m-N_m^0(v_x)}{\uptau'_{th}}
+	\end{equation}
+	整理即：
+	\begin{equation}\label{eq:2}
+		\frac{\partial N_m}{\partial x}+\frac{1}{v_x\uptau_c}N_m=\frac{1}{v_x\uptau_m}\overline{N}_m+\frac{1}{v_x\uptau'_{th}}N_m^0
+	\end{equation}
+	其中，$\dfrac{1}{\uptau_c}=\dfrac{1}{\uptau_m}+\dfrac{1}{\uptau'_{th}}$
+	\\[0.5cm]
+	令$P(x)=\dfrac{1}{v_x\uptau_c},Q(x)=\dfrac{1}{v_x\uptau_m}\overline{N}_m+\dfrac{1}{v_x\uptau'_{th}}N_m^0$,则：
+	\begin{equation}\label{eq:3}
+		\begin{aligned}
+		N_m(x,v_x>0)&=C_0^>\exp(-\int_0^xP(x)\mathrm{d}x)+\exp(-\int_0^xP(x)\mathrm{d}x)\int_0^xQ(x)\exp(\int_0^xP(x)\mathrm{d}x)\mathrm{d}x\\
+			&=\frac{\uptau_c}{\uptau'_{th}}N_m^0+(C_0^>-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp(-\frac{1}{v_x\uptau_c}x)+\int_0^x\frac{1}{v_x\uptau_m}\overline{N}_m\exp[-\frac{1}{v_x\uptau_c}(x-x')]\mathrm{d}x'	
+		\end{aligned}
+	\end{equation}
+	\begin{equation}\label{eq:4}
+		\begin{aligned}
+		N_m(x,v_x<0)&=C_0^<\exp(-\int_d^xP(x)\mathrm{d}x)+\exp(-\int_d^xP(x)\mathrm{d}x)\int_d^xQ(x)\exp(\int_d^xP(x)\mathrm{d}x)\mathrm{d}x\\
+			&=\frac{\uptau_c}{\uptau'_{th}}N_m^0+(C_0^<-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp[\frac{1}{v_x\uptau_c}(d-x)]-\int_x^d\frac{1}{v_x\uptau_m}\overline{N}_m\exp[-\frac{1}{v_x\uptau_c}(x-x')]\mathrm{d}x'	
+		\end{aligned}
+	\end{equation}
+	于是可得:
+	\begin{equation}\label{eq:5}
+		\begin{aligned}
+			\overline{N}_m(x)&=\int_{-\infty}^{\infty}N_m(x,v_x)\mathrm{d}v_x\\
+			&=\int_{-\infty}^0N_m(x,v_x<0)\mathrm{d}v_x+\int_0^{\infty}N_m(x,v_x>0)\mathrm{d}v_x\\
+			&=\int_0^{\infty}N_m(x,-v_x<0)+N_m(x,v_x>0)\mathrm{d}v_x\\
+			&=s_1+s_2+s_3
+		\end{aligned}
+	\end{equation}
+	其中：
+	\begin{equation}
+		\begin{aligned}
+			s_1&=\int_0^{\infty}\{2\frac{\uptau_c}{\uptau'_{th}}N_m^0+(C_0^>-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp(-\frac{1}{v_x\uptau_c}x)+(C_0^<-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp[-\frac{1}{v_x\uptau_c}(d-x)]\}\mathrm{d}v_x\\
+			&=\frac{\uptau_c}{\uptau'_{th}}\overline{N}_m^0+\int_0^{\infty}\{(C_0^>-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp(-\frac{1}{v_x\uptau_c}x)+(C_0^<-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp[-\frac{1}{v_x\uptau_c}(d-x)]\}\mathrm{d}v_x
+		\end{aligned}
+	\end{equation}
+	\phantom{aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}(推导过程用到$\int\limits_0^{\infty}2N_m^0\mathrm{d}v_x=\overline{N}_m^0$).
+	\[
+		s_2=\int_0^{\infty}\int_0^x\frac{1}{v_x\uptau_m}\overline{N}_m\exp[-\frac{1}{v_x\uptau_c}(x-x')]\mathrm{d}x'\mathrm{d}v_x	
+	\]
+	\[
+		s_3=\int_0^{\infty}\int_x^d\frac{1}{v_x\uptau_m}\overline{N}_m\exp[\frac{1}{v_x\uptau_c}(x-x')]\mathrm{d}x'\mathrm{d}v_x	
+	\]
+	合并$s_2$和$s_3$：
+	\begin{equation}
+		s_2+s_3=\int_0^{\infty}\int_0^d\frac{1}{v_x\uptau_m}\exp(-\frac{1}{v_x\uptau_c}|x-x'|)\mathrm{d}x'\mathrm{d}v_x\overline{N}_m
+	\end{equation}
+\end{document}
