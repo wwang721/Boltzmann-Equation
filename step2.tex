@@ -14,19 +14,19 @@
 	\begin{equation}\label{eq:2}
 		\frac{\partial N_m}{\partial x}+\frac{1}{v_x\uptau_c}N_m=\frac{1}{v_x\uptau_m}\overline{N}_m+\frac{1}{v_x\uptau'_{th}}N_m^0
 	\end{equation}
-	其中，$\dfrac{1}{\uptau_c}=\dfrac{1}{\uptau_m}+\dfrac{1}{\uptau'_{th}}$
+	其中，$\dfrac{1}{\uptau_c}=\dfrac{1}{\uptau_m}+\dfrac{1}{\uptau'_{th}}$.
 	\\[0.5cm]
 	令$P(x)=\dfrac{1}{v_x\uptau_c},Q(x)=\dfrac{1}{v_x\uptau_m}\overline{N}_m+\dfrac{1}{v_x\uptau'_{th}}N_m^0$,则：
 	\begin{equation}\label{eq:3}
 		\begin{aligned}
 		N_m(x,v_x>0)&=C_0^>\exp(-\int_0^xP(x)\mathrm{d}x)+\exp(-\int_0^xP(x)\mathrm{d}x)\int_0^xQ(x)\exp(\int_0^xP(x)\mathrm{d}x)\mathrm{d}x\\
-			&=\frac{\uptau_c}{\uptau'_{th}}N_m^0+(C_0^>-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp(-\frac{1}{v_x\uptau_c}x)+\int_0^x\frac{1}{v_x\uptau_m}\overline{N}_m\exp[-\frac{1}{v_x\uptau_c}(x-x')]\mathrm{d}x'	
+			&=\frac{\uptau_c}{\uptau'_{th}}N_m^0+(C_0^>-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp(-\frac{1}{v_x\uptau_c}x)+\int_0^x\frac{1}{v_x\uptau_m}\overline{N}_m(x')\exp[-\frac{1}{v_x\uptau_c}(x-x')]\mathrm{d}x'	
 		\end{aligned}
 	\end{equation}
 	\begin{equation}\label{eq:4}
 		\begin{aligned}
 		N_m(x,v_x<0)&=C_0^<\exp(-\int_d^xP(x)\mathrm{d}x)+\exp(-\int_d^xP(x)\mathrm{d}x)\int_d^xQ(x)\exp(\int_d^xP(x)\mathrm{d}x)\mathrm{d}x\\
-			&=\frac{\uptau_c}{\uptau'_{th}}N_m^0+(C_0^<-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp[\frac{1}{v_x\uptau_c}(d-x)]-\int_x^d\frac{1}{v_x\uptau_m}\overline{N}_m\exp[-\frac{1}{v_x\uptau_c}(x-x')]\mathrm{d}x'	
+			&=\frac{\uptau_c}{\uptau'_{th}}N_m^0+(C_0^<-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp[\frac{1}{v_x\uptau_c}(d-x)]-\int_x^d\frac{1}{v_x\uptau_m}\overline{N}_m(x')\exp[-\frac{1}{v_x\uptau_c}(x-x')]\mathrm{d}x'	
 		\end{aligned}
 	\end{equation}
 	于是可得:
@@ -39,21 +39,42 @@
 		\end{aligned}
 	\end{equation}
 	其中：
-	\begin{equation}
+	\begin{equation}\label{eq:6}
 		\begin{aligned}
 			s_1&=\int_0^{\infty}\{2\frac{\uptau_c}{\uptau'_{th}}N_m^0+(C_0^>-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp(-\frac{1}{v_x\uptau_c}x)+(C_0^<-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp[-\frac{1}{v_x\uptau_c}(d-x)]\}\mathrm{d}v_x\\
-			&=\frac{\uptau_c}{\uptau'_{th}}\overline{N}_m^0+\int_0^{\infty}\{(C_0^>-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp(-\frac{1}{v_x\uptau_c}x)+(C_0^<-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp[-\frac{1}{v_x\uptau_c}(d-x)]\}\mathrm{d}v_x
+			&=\frac{\uptau_c}{\uptau'_{th}}\overline{N}_m^{\phantom{0}0}+\int_0^{\infty}\{(C_0^>-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp(-\frac{1}{v_x\uptau_c}x)+(C_0^<-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp[-\frac{1}{v_x\uptau_c}(d-x)]\}\mathrm{d}v_x
 		\end{aligned}
 	\end{equation}
-	\phantom{aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}(推导过程用到$\int\limits_0^{\infty}2N_m^0\mathrm{d}v_x=\overline{N}_m^0$).
+	\phantom{aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}(注：$\displaystyle\int_0^{\infty}2N_m^0\mathrm{d}v_x=\overline{N}_m^{\phantom{0}0}$).
 	\[
-		s_2=\int_0^{\infty}\int_0^x\frac{1}{v_x\uptau_m}\overline{N}_m\exp[-\frac{1}{v_x\uptau_c}(x-x')]\mathrm{d}x'\mathrm{d}v_x	
-	\]
-	\[
-		s_3=\int_0^{\infty}\int_x^d\frac{1}{v_x\uptau_m}\overline{N}_m\exp[\frac{1}{v_x\uptau_c}(x-x')]\mathrm{d}x'\mathrm{d}v_x	
+		\begin{aligned}
+			s_2&=\int_0^{\infty}\int_0^x\frac{1}{v_x\uptau_m}\overline{N}_m(x')\exp[-\frac{1}{v_x\uptau_c}(x-x')]\mathrm{d}x'\mathrm{d}v_x	\\
+			s_3&=\int_0^{\infty}\int_x^d\frac{1}{v_x\uptau_m}\overline{N}_m(x')\exp[\frac{1}{v_x\uptau_c}(x-x')]\mathrm{d}x'\mathrm{d}v_x	
+		\end{aligned}
 	\]
 	合并$s_2$和$s_3$：
-	\begin{equation}
-		s_2+s_3=\int_0^{\infty}\int_0^d\frac{1}{v_x\uptau_m}\exp(-\frac{1}{v_x\uptau_c}|x-x'|)\mathrm{d}x'\mathrm{d}v_x\overline{N}_m
+	\begin{equation}\label{eq:7}
+		s_2+s_3=\int_0^d\begin{bmatrix}\displaystyle\int_0^{\infty}\frac{1}{v_x\uptau_m}\exp(-\frac{1}{v_x\uptau_c}|x-x'|)\mathrm{d}v_x\end{bmatrix}\mathrm{d}x'\cdot\overline{N}_m(x')
+	\end{equation}
+	将式\eqref{eq:6}和式\eqref{eq:7}带回式\eqref{eq:5},可得矩阵方程：
+	\begin{equation}\label{eq:8}
+		\begin{pmatrix}
+			\overline{N}_m(0)\\ \vdots\\ \overline{N}_m(x)\\ \vdots \\ \overline{N}_m(\infty)
+		\end{pmatrix}
+		=
+		\begin{pmatrix}
+			f_{ak}(0,0)&\dots&f_{ak}(0,x')&\dots&f_{ak}(0,\infty)\\
+			\vdots&\ddots&\vdots&\ddots&\vdots\\
+			f{ak}(x,0)&\dots&f_{ak}(x,x')&\dots&f_{ak}(x,\infty)\\
+			\vdots&\ddots&\vdots&\ddots&\vdots\\
+			f_{ak}(\infty,0)&\dots&f_{ak}(\infty,x')&\dots&f_{ak}(\infty,\infty)\\
+		\end{pmatrix}
+		\begin{pmatrix}
+			\overline{N}_m(0)\\ \vdots\\ \overline{N}_m(x')\\ \vdots \\ \overline{N}_m(\infty)
+		\end{pmatrix}
+		+
+		\begin{pmatrix}
+			s_1(0)\\ \vdots\\s_1(x)\\ \vdots\\s_1(\infty)
+		\end{pmatrix}
 	\end{equation}
 \end{document}
