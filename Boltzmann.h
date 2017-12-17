@@ -12,8 +12,8 @@
 
 #define Mu 1e-6 //微米数量级
 
-void s1_Vector(double x[],double s1[],int n); 
-void input_fak(double x[], double **fak, int n);
+void s1_Vector(double x[], double s1[], int n); 
+void input_fak(double x[], double w[], double **fak, int n);
 
 void gauleg(double x1, double x2, double x[], double w[], int n);  
 
