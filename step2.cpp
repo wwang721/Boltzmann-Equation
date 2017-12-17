@@ -41,7 +41,7 @@ int main()
 	s1_Vector(x,s1,num); //s1
 	cout<<"<s1> done..."<<endl;
 
-	input_fak(x,fak,num); //fak
+	input_fak(x,w,fak,num); //fak
 	cout<<"<fak> done..."<<endl;
 
 	fred2(num,x,w,fak,s1,Nmb);	
