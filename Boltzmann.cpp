@@ -32,7 +32,7 @@ void s1_Vector(double x[], double s1[], int n)
 	fclose(fp);	//输出
 }
 
-void input_fak(double x[], double **fak, int n)
+void input_fak(double x[], double w[], double **fak, int n)
 //fak
 {
 	cout<<"<fak>\n";
@@ -43,7 +43,7 @@ void input_fak(double x[], double **fak, int n)
 		{
 			fak[i][j]=0.0;
 			for(double v=0.1;v<N;v+=0.1)
-				fak[i][j]+=(1/(v*tm))*exp(-fabs(x[i]-x[j])*Mu/(v*tc))*0.1*distance*Mu/n;
+				fak[i][j]+=(1/(v*tm))*exp(-fabs(x[i]-x[j])*Mu/(v*tc))*0.1*w[j]*Mu;
 			if(((i-1)*n+j)==p*q)
 			{	
 				printf("已完成：%4.1f%%\n",(float)p/10);
