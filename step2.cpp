@@ -69,8 +69,8 @@ int main()
 	T=end-start;
 	second=T%60;
 	minute=T/60;
-	minute=minute%60;
 	hour=minute/60;
+	minute=minute%60;
 	cout<<"用时:"<<hour<<"h "<<minute<<"min "<<second<<"s.\n";	//计时结束并输出所用时间
 	
 	return 0;
