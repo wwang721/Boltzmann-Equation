@@ -8,15 +8,15 @@
 \begin{document}\zihao{-4}
 	\noindent 将上一次的方程增加一个散射项，可得：
 	\begin{equation}\label{eq:1}
-		v_x\frac{\partial N_m(x,v_x)}{\partial x}=-\frac{N_m(x,v_x)-\overline{N}_m(x)}{\uptau_m}-\frac{N_m-N_m^0(v_x)}{\uptau'_{th}}
+		v_x\frac{\partial N_m(x,v_x)}{\partial x}=-\frac{N_m(x,v_x)-N_m^0(v_x)}{\uptau'_{th}}-\frac{N_m(x,v_x)-\overline{N}_m(x)}{\uptau_m}
 	\end{equation}
 	整理即：
 	\begin{equation}\label{eq:2}
-		\frac{\partial N_m}{\partial x}+\frac{1}{v_x\uptau_c}N_m=\frac{1}{v_x\uptau_m}\overline{N}_m+\frac{1}{v_x\uptau'_{th}}N_m^0
+		\frac{\partial N_m}{\partial x}+\frac{1}{v_x\uptau_c}N_m=\frac{1}{v_x\uptau'_{th}}N_m^0+\frac{1}{v_x\uptau_m}\overline{N}_m
 	\end{equation}
-	其中，$\dfrac{1}{\uptau_c}=\dfrac{1}{\uptau_m}+\dfrac{1}{\uptau'_{th}}$.
+	其中，$\dfrac{1}{\uptau_c}=\dfrac{1}{\uptau'_{th}}+\dfrac{1}{\uptau_m}$.
 	\\[0.5cm]
-	令$P(x)=\dfrac{1}{v_x\uptau_c},Q(x)=\dfrac{1}{v_x\uptau_m}\overline{N}_m+\dfrac{1}{v_x\uptau'_{th}}N_m^0$,则：
+	令$P(x)=\dfrac{1}{v_x\uptau_c},Q(x)=\dfrac{1}{v_x\uptau'_{th}}N_m^0+\dfrac{1}{v_x\uptau_m}\overline{N}_m$,则：
 	\begin{equation}\label{eq:3}
 		\begin{aligned}
 		N_m(x,v_x>0)&=C_0^>\exp(-\int_0^xP(x)\mathrm{d}x)+\exp(-\int_0^xP(x)\mathrm{d}x)\int_0^xQ(x)\exp(\int_0^xP(x)\mathrm{d}x)\mathrm{d}x\\
@@ -34,7 +34,7 @@
 		\begin{aligned}
 			\overline{N}_m(x)&=\int_{-\infty}^{\infty}N_m(x,v_x)\mathrm{d}v_x\\
 			&=\int_{-\infty}^0N_m(x,v_x<0)\mathrm{d}v_x+\int_0^{\infty}N_m(x,v_x>0)\mathrm{d}v_x\\
-			&=\int_0^{\infty}N_m(x,-v_x<0)+N_m(x,v_x>0)\mathrm{d}v_x\\
+			&=\int_0^{\infty}[N_m(x,-v_x<0)+N_m(x,v_x>0)]\mathrm{d}v_x\\
 			&=s_1+s_2+s_3
 		\end{aligned}
 	\end{equation}
@@ -77,4 +77,5 @@
 			s_1(0)\\ \vdots\\s_1(x)\\ \vdots\\s_1(\infty)
 		\end{pmatrix}
 	\end{equation}
+	其中：$f_{ak}(x,x')=\displaystyle\int_0^{\infty}\frac{1}{v_x\uptau_m}\exp(-\frac{1}{v_x\uptau_c}|x-x'|)\mathrm{d}v_x\mathrm{d}x'$
 \end{document}
