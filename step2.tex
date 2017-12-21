@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage{ctex}
 \usepackage{upgreek}
+\usepackage{xfrac}
 \usepackage{amsmath}
 \usepackage{geometry}
 \geometry{a4paper,centering,scale=0.8}
@@ -32,16 +33,16 @@
 	于是可得:
 	\begin{equation}\label{eq:5}
 		\begin{aligned}
-			\overline{N}_m(x)&=\int_{-\infty}^{\infty}N_m(x,v_x)\mathrm{d}v_x\\
-			&=\int_{-\infty}^0N_m(x,v_x<0)\mathrm{d}v_x+\int_0^{\infty}N_m(x,v_x>0)\mathrm{d}v_x\\
+			\overline{N}_m(x)&=\frac{\displaystyle\int_{-\infty}^{\infty}N_m(x,v_x)\mathrm{d}v_x}{\displaystyle\int_{-\infty}^{\infty}\mathrm{d}v_x}\\
+			\int_{-\infty}^{\infty}\mathrm{d}v_x\cdot\overline{N}_m(x)&=\int_{-\infty}^0N_m(x,v_x<0)\mathrm{d}v_x+\int_0^{\infty}N_m(x,v_x>0)\mathrm{d}v_x\\
 			&=\int_0^{\infty}[N_m(x,-v_x<0)+N_m(x,v_x>0)]\mathrm{d}v_x\\
-			&=s_1+s_2+s_3
+			&=\int_{-\infty}^{\infty}\mathrm{d}v_x\cdot s_1+s_2+s_3
 		\end{aligned}
 	\end{equation}
 	其中：
 	\begin{equation}\label{eq:6}
 		\begin{aligned}
-			s_1&=\int_0^{\infty}\{2\frac{\uptau_c}{\uptau'_{th}}N_m^0+(C_0^>-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp(-\frac{1}{v_x\uptau_c}x)+(C_0^<-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp[-\frac{1}{v_x\uptau_c}(d-x)]\}\mathrm{d}v_x\\
+			\int_{-\infty}^{\infty}\mathrm{d}v_x\cdot s_1&=\int_0^{\infty}\{2\frac{\uptau_c}{\uptau'_{th}}N_m^0+(C_0^>-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp(-\frac{1}{v_x\uptau_c}x)+(C_0^<-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp[-\frac{1}{v_x\uptau_c}(d-x)]\}\mathrm{d}v_x\\
 			&=\frac{\uptau_c}{\uptau'_{th}}\overline{N}_m^{\phantom{0}0}+\int_0^{\infty}\{(C_0^>-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp(-\frac{1}{v_x\uptau_c}x)+(C_0^<-\frac{\uptau_c}{\uptau'_{th}}N_m^0)\exp[-\frac{1}{v_x\uptau_c}(d-x)]\}\mathrm{d}v_x
 		\end{aligned}
 	\end{equation}
@@ -77,5 +78,12 @@
 			s_1(0)\\ \vdots\\s_1(x)\\ \vdots\\s_1(\infty)
 		\end{pmatrix}
 	\end{equation}
-	其中：$f_{ak}(x,x')=\displaystyle\int_0^{\infty}\frac{1}{v_x\uptau_m}\exp(-\frac{1}{v_x\uptau_c}|x-x'|)\mathrm{d}v_x\mathrm{d}x'$
+	其中：$f_{ak}(x,x')=\dfrac{\displaystyle\int_0^{\infty}\frac{1}{v_x\uptau_m}\exp(-\frac{1}{v_x\uptau_c}|x-x'|)\mathrm{d}v_x\mathrm{d}x'}{\displaystyle\int_{-\infty}^{\infty}\mathrm{d}v_x}$\\[0.7cm]
+	利用计算机求其数值解绘图可得：
+		\begin{figure}[ht]
+	\centering
+	\includegraphics[width=10cm]{Nmb.png}
+	\caption{有两个散射项所得$\overline{N}_m(x)$}
+	\label{fg:1}
+	\end{figure}
 \end{document}
