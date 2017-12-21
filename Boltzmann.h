@@ -1,23 +1,28 @@
-#define N 1e6	//积分上限
+//可改变的常量
+#define Up 1e6	//积分上限
+#define Low 0	//积分下限
 
 #define th 1e-11
 #define tm 1e-11
 
 #define Nm_0 0
 
-#define c1 -1
+#define c1 2000
 #define c2 0
 
 #define distance 40 //单位：μm
 
 #define Mu 1e-6 //微米数量级
 
-void s1_Vector(double x[], double s1[], int n); 
-void input_fak(double x[], double w[], double **fak, int n);
+#define intvx 2e9 //对Vx的积分
 
-void gauleg(double x1, double x2, double x[], double w[], int n);  
+double s1_integrand(double v, double x);
+double fak_integrand(double v, double x, double xp);
+
+void s1_vector(double x[], double s1[], int n); 
+void fak_matrix(double x[], double w[], double **fak, int n);
 
 void ludcmp(double **a, int n, int *indx, double *d);
 void lubksb(double **a, int n, int *indx, double b[]);
 
-void fred2(int n, double t[], double w[], double **omk, double g[], double f[]);
+void fred2(int n, double t[], double **omk, double g[], double f[]);
