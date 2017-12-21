@@ -3,109 +3,76 @@
 #include <stdio.h>
 #include <math.h>
 #include <cmath>
-using namespace std;
 
 #include "nrutil.h"
+#include "Integ.h" 
 #include "Boltzmann.h"
+
+using namespace std;
 
 static double tc=th*tm/(th+tm);
 
-void s1_Vector(double x[], double s1[], int n) 
+double s1_integrand(double v, double x)
+//s1被积函数
+{
+	return (c1*exp(-x*Mu/(v*tc))+c2*exp(-(distance-x)*Mu/(v*tc)));
+}
+
+void s1_vector(double x[], double s1[], int n) 
 //s1
 {
-	for(int i=1; i<=n; i++)
-	{
-		s1[i]=0.0;
-		for(double v=0.1; v<N; v+=0.1)
-			s1[i]+=(c1*exp(-x[i]*Mu/(v*tc))+c2*exp(-(distance-x[i])*Mu/(v*tc)))*0.1;
-		s1[i]+=(tc/th)*Nm_0;	
-	}	//积分
-
 	FILE *fp;
 	if((fp=fopen("s1.txt","w"))==NULL)
 	{
 		cout<<"Can't open file.\n";
 		exit(1);
 	}
-	for(int i=1;i<=n;i++)
-		fprintf(fp,"%lf\n",s1[i]);
-	fclose(fp);	//输出
+	for(int i=1; i<=n; i++)
+	{
+		s1[i] = Chebyshev_integ1(Low, Up, s1_integrand, x[i]);
+		s1[i]+=(tc/th)*Nm_0;
+		s1[i]=s1[i]/intvx;
+		fprintf(fp,"%lf\n",s1[i]);	
+	}	
+	fclose(fp);	//积分并输出
 }
 
-void input_fak(double x[], double w[], double **fak, int n)
+double fak_integrand(double v, double x, double xp)
+//fak被积函数
+{
+	return ((1/(v*tm))*exp(-fabs(x-xp)*Mu/(v*tc)));
+}
+
+void fak_matrix(double x[], double w[], double **fak, int n)
 //fak
 {
 	cout<<"<fak>\n";
-	int p(1),q=n*n/1000;
-	for(int i=1; i<=n; i++)
-	{
-		for(int j=1; j<=n; j++)
-		{
-			fak[i][j]=0.0;
-			for(double v=0.1;v<N;v+=0.1)
-				fak[i][j]+=(1/(v*tm))*exp(-fabs(x[i]-x[j])*Mu/(v*tc))*0.1*w[j]*Mu;
-			if(((i-1)*n+j)==p*q)
-			{	
-				printf("已完成：%4.1f%%\n",(float)p/10);
-				p++;
-			}	
-		}
-	}	//积分
-
 	FILE *fp;
 	if((fp=fopen("fak.txt","w"))==NULL)
 	{
 		cout<<"Can't open file.\n";
 		exit(1);
 	}
-	for(int i=1;i<=n;i++)
+	int p(1),q=n*n/100;
+	for(int i=1; i<=n; i++)
 	{
 		for(int j=1; j<=n; j++)
 		{
+			fak[i][j] = Chebyshev_integ(Low, Up, fak_integrand, x[i], x[j])*w[j]*Mu/intvx;   
 			fprintf(fp,"%lf",fak[i][j]);
 			if(j==n)
 				fprintf(fp,"\n");
 			else
-				fprintf(fp,"\t");
+				fprintf(fp,"\t");	
+			if( ((i-1)*n+j) == p*q)
+			{
+				cout<<"已完成:"<<p<<"%\n";
+				p++;						
+			}							//积分并输出
 		}
 	}
 	fclose(fp);	//以矩阵形式输出
 }
-
-#define EPS 3.0e-15
-void gauleg(double x1, double x2, double x[], double w[], int n)  
-{
-	int m, j, i;
-	double z1, z, xm, xl, pp, p3, p2, p1;
-
-	m=(n + 1)/2;
-	xm=0.5*(x2 + x1);
-	xl=0.5*(x2 - x1);
-	for (i=1;i<=m;i++)
-	{
-		z=cos(3.141592653589793238462643*(i-0.25)/(n+0.5));
-		do 
-		{
-			p1=1.0;
-			p2=0.0;
-			for (j=1;j<=n;j++)
-			{
-				p3=p2;
-				p2=p1;
-				p1=((2.0*j-1.0)*z*p2-(j-1.0)*p3)/j;
-			}
-			pp=n*(z*p1-p2)/(z*z-1.0);
-			z1=z;
-			z=z1-p1/pp;
-		}
-		while (fabs(z-z1) > EPS);
-		x[i]=xm-xl*z;
-		x[n+1-i]=xm+xl*z;
-		w[i]=2.0*xl/((1.0-z*z)*pp*pp);
-		w[n+1-i]=w[i];
-	}
-}
-#undef EPS
 
 #define NRANSI
 #define TINY 1.0e-20
@@ -193,20 +160,20 @@ void lubksb(double **a, int n, int *indx, double b[])
 	}
 }
 
-void fred2(int n, double t[], double w[], double **omk, double g[], double f[])
+void fred2(int n, double t[], double **omk, double g[], double f[])
 {
 	int i,j,*indx;
 	double d;
 
 	indx=ivector(1,n);
-	
+
 	for (i=1;i<=n;i++) 
 	{ 
 		for (j=1;j<=n;j++) 
 			omk[i][j]=(double)(i == j) - omk[i][j];
 		f[i]=g[i];
 	}
-	
+
 	ludcmp(omk,n,indx,&d); 
 	lubksb(omk,n,indx,f);
 	
