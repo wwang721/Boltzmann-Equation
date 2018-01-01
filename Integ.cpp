@@ -7,13 +7,13 @@
 #include "Integ.h"
 
 /*
-gaulegÖ÷ÒªÊÇ¸ø³öÇø¼äµÄ»®·ÖºÍÈ¨ÖØ
+gaulegä¸»è¦æ˜¯ç»™å‡ºåŒºé—´çš„åˆ’åˆ†å’Œæƒé‡
  
 */
 
 #define EPS 3.0e-15
 void gauleg(double x1, double x2, double x[], double w[], int n)  
-//w[]Ó¦¸ÃÔõÃ´¸ø¶¨£¿x[]ºÍw[]¶¼ÊÇÍâ²¿Ëù¸ø³öµÄ¿ÕÊ¸Á¿
+//w[]åº”è¯¥æ€ä¹ˆç»™å®šï¼Ÿx[]å’Œw[]éƒ½æ˜¯å¤–éƒ¨æ‰€ç»™å‡ºçš„ç©ºçŸ¢é‡
 //Return arrays x[1..n] and w[1..n] of length n, containing the absciaasa and weights of the Gauss-Legendre n-point quadrature formula
 {
 	int m, j, i;
@@ -55,7 +55,7 @@ void gauleg(double x1, double x2, double x[], double w[], int n)
 /*n_steps--number of panels, func(t, x)-integrand at given x*/
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//Simpson·¨ 
+//Simpsonæ³• 
 
 double Simpson_integ (int n_steps, double a, double b, double (*func)( double t, double x, double xp), double x, double xp)
 {
@@ -118,9 +118,49 @@ double Simpson_integ2 (int n_steps, double a, double b, double (*func)( double t
     return sum;
 }
 
+double Simpson_integ3 (int n_steps, double a, double b, double (*func)( double t, int i, double x[], double Nmb[], double v0, double beta ), int i, double x[], double Nmb[], double v0, double beta)
+{
+    int n;
+    double sum=0;
+    double tk=0., dt;
+    double f1, f2, f3;
+   
+    dt=(b-a)/n_steps;
+    for(n=0;n<n_steps;n++)
+    {
+        tk=a+n*dt;
+        f1=(*func)(tk,i,x,Nmb,v0,beta);
+        f2=(*func)(tk+dt/2,i,x,Nmb,v0,beta);
+        f3=(*func)(tk+dt,i,x,Nmb,v0,beta);
+        sum+=dt*(f1+4*f2+f3)/6;/*simpson f-la for Ik*/
+    }
+  
+    return sum;
+}
+
+double Simpson_integ4 (int n_steps, double a, double b, double (*func)( double t, int i, int num, double x[], double Nmb[], double beta ),int i, int num, double x[], double Nmb[], double beta)
+{
+    int n;
+    double sum=0;
+    double tk=0., dt;
+    double f1, f2, f3;
+   
+    dt=(b-a)/n_steps;
+    for(n=0;n<n_steps;n++)
+    {
+        tk=a+n*dt;
+        f1=(*func)(tk,i,num,x,Nmb,beta);
+        f2=(*func)(tk+dt/2,i,num,x,Nmb,beta);
+        f3=(*func)(tk+dt,i,num,x,Nmb,beta);
+        sum+=dt*(f1+4*f2+f3)/6;/*simpson f-la for Ik*/
+    }
+  
+    return sum;
+}
+
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//Ö´ĞĞChebyshevÇó»ı·¨
+//æ‰§è¡ŒChebyshevæ±‚ç§¯æ³•
 
 double Chebyshev_integ (double a, double b, double (*func)( double t, double x, double xp), double x, double xp)   
 
@@ -228,9 +268,43 @@ double Chebyshev_integ1 (double a, double b, double (*func)( double t, double x)
       
       return g;
   }
-  
+
+  double Chebyshev_integ3 (double a, double b, double (*func)(double t, double x, double xp, double xpp), double x, double xp, double xpp)
+  { 
+    int m,i,j;
+      double h,d,p,ep,g,aa,bb,s,tt;
+      double eps= 0.000001;
+      static double t[5]={-0.8324975,-0.3745414,0.0,
+                                  0.3745414,0.8324975};
+      m=1;
+      h=b-a; d=fabs(0.001*h);
+      
+      p=1.0e+35; ep=1.0+eps;
+      
+      while ((ep>=eps)&&(fabs(h)>d))
+      { 
+      g=0.0;
+          for (i=1;i<=m;i++)
+          { 
+        aa=a+(i-1.0)*h; bb=a+i*h;
+              s=0.0;
+              
+              for (j=0;j<=4;j++)
+              { 
+          tt=((bb-aa)*t[j]+(bb+aa))/2.0;
+                  s=s+(*func)(tt,x,xp,xpp);
+              }
+              g=g+s;
+          }
+          g=g*h/5.0;
+          ep=fabs(g-p)/(1.0+fabs(g));
+          p=g; m=m+1; h=(b-a)/m;
+      }
+      
+      return g;
+  }
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
-  //Ö´ĞĞ±ä²½³¤ÌİĞÎÇó»ı·¨
+  //æ‰§è¡Œå˜æ­¥é•¿æ¢¯å½¢æ±‚ç§¯æ³•
   double integration1 (double a, double b, double (*func)(double t, double xx),double xx)       
   { 
 	  int n,k;
@@ -281,9 +355,33 @@ double Chebyshev_integ1 (double a, double b, double (*func)( double t, double x)
       return t;
   }
 
-
+  double integration3 (double a, double b, double (*func)(double t, double xx, double xxx),double xx, double xxx)
+  { 
+    int n,k;
+      double fa,fb,h,t1,p,s,x,t;
+      double eps= 0.000001;
+       
+      fa=func (a,xx,xxx);  fb=func (b,xx,xxx);
+      n=1; h=b-a;
+      t1=h*(fa+fb)/2.0;
+      p=eps+1.0;
+      while (p>=eps)
+      { 
+      s=0.0;
+          for (k=0;k<=n-1;k++)
+          { 
+        x=a+(k+0.5)*h;
+              s=s+func (x,xx,xxx);
+          }
+          t=(t1+h*s)/2.0;
+          p=fabs(t1-t);
+          t1=t; n=n+n; h=h/2.0;
+      }
+      return t;
+  }
+  
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
-  //RombergÇó»ı·¨
+  //Rombergæ±‚ç§¯æ³•
   
   double Romberg1 (double a, double b, double (*func)(double t, double xx),double xx)       
   { 
@@ -349,5 +447,8 @@ double Chebyshev_integ1 (double a, double b, double (*func)( double t, double x)
       return q;
   }
   
+
+
+
 
 
