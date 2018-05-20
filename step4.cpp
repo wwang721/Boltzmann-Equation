@@ -104,7 +104,6 @@ int main()
 	
 	free_dvector(dBeta,1,num);
     
-
     //计时结束并输出所用时间
 	end=time(NULL);
 	cout<<"程序结束！"<<endl;
