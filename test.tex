@@ -1,0 +1,155 @@
+\documentclass{article}
+\usepackage{ctex}
+\usepackage{upgreek}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{xfrac}
+\usepackage{color}
+\usepackage{subfigure}
+\usepackage{geometry}
+\geometry{a4paper,centering,scale=0.9}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+\begin{document}\zihao{-4}
+	\noindent 方程：
+	\begin{equation}\label{eq:1}
+		v_x\frac{\partial n_m(x,v_x)}{\partial x}=-\frac{n_m(x,v_x)-n_m^0(v_x)}{\uptau'_{th}}-\frac{n_m(x,v_x)-\bar{n}_m(x)}{\uptau_m}-\beta v_x\frac{\mathrm{d}\bar{n}_m(x)}{\mathrm{d}x}
+	\end{equation}
+	整理即：
+	\begin{equation}\label{eq:2}
+		\frac{\partial n_m}{\partial x}+\frac{1}{v_x\uptau_c}n_m=\frac{1}{v_x\uptau'_{th}}n_m^0+\frac{1}{v_x\uptau_m}\bar{n}_m-\beta\frac{\mathrm{d}\bar{n}_m}{\mathrm{d}x}
+	\end{equation}
+	其中，$\dfrac{1}{\uptau_c}=\dfrac{1}{\uptau'_{th}}+\dfrac{1}{\uptau_m}$.
+	
+	\noindent 且
+	\[\upepsilon=\upepsilon_m\sin^2(\frac{aq}{2})+\upepsilon_H\]
+	\[v_x=\frac{\partial\upepsilon}{\hbar\partial q}=v_m\sin(aq)\]
+	
+	可得：
+	\begin{equation}\label{eq:3}
+	\begin{aligned}
+		n_m(x,v_x>0)=&\textbf{N}_{injection}+\textbf{N}_{thermal-relaxation}+\textbf{N}_{magnon_relaxtion}+\textbf{N}_{pressure}+\textbf{N}_{chemical}\\
+			=&C_0^>\exp(-\frac{1}{v_x\uptau_c}x)\\
+			&+pn^0_m[1-\exp(-\frac{1}{v_x\uptau_c}x)]\\
+			&+\int_0^x\frac{\mathrm{d}\beta}{\mathrm{d}x'}\exp[-\frac{1}{v_x\uptau_{c}}(x-x')]\bar{n}_m\mathrm{d}x'\\
+			&+\int_0^x\beta[\frac{1}{v_x\uptau_c}+\delta(x')-\delta(x-x')]\exp[-\frac{1}{v_x\uptau_{c}}(x-x')]\bar{n}_m\mathrm{d}x'\\
+			&+\int_0^x\frac{1}{v_x\uptau_m}\exp[-\frac{1}{v_x\uptau_{c}}(x-x')]\bar{n}_m\mathrm{d}x'\\
+	\end{aligned}
+	\end{equation}
+	其中，$p=\dfrac{\uptau_c}{\uptau'_{th}}.$
+	\begin{equation}\label{eq:4}
+	\begin{aligned}
+		n_m(x,v_x<0)=&C_0^<\exp[\frac{1}{v_x\uptau_c}(d-x)]\\
+			&+pn^0_m\{1-\exp[\frac{1}{v_x\uptau_c}(d-x)]\}\\
+			&-\int_x^d\frac{\mathrm{d}\beta}{\mathrm{d}x'}\exp[-\frac{1}{v_x\uptau_{c}}(x-x')]\bar{n}_m\mathrm{d}x'\\
+			&-\int_x^d\beta[\frac{1}{v_x\uptau_c}+\delta(x-x')-\delta(d-x')]\exp[-\frac{1}{v_x\uptau_{c}}(x-x')]\bar{n}_m\mathrm{d}x'\\
+			&-\int_x^d\frac{1}{v_x\uptau_m}\exp[-\frac{1}{v_x\uptau_{c}}(x-x')]\bar{n}_m\mathrm{d}x'\\
+	\end{aligned}
+	\end{equation}
+	从而：
+	\begin{equation}\label{eq:5}
+		\begin{aligned}
+			\int_{-\infty}^{\infty}n_m\mathrm{d}\vec{\textbf{v}}=&\int_0^\infty \{C_0^>\exp(-\frac{1}{v_x\uptau_c}x)+C_0^<\exp[-\frac{1}{v_x\uptau_c}(d-x)]\}\mathrm{d}\vec{\textbf{v}}\\
+			&+\int_0^\infty pn^0_m\{2-\exp(-\frac{1}{v_x\uptau_c}x)-\exp[-\frac{1}{v_x\uptau_c}(d-x)]\}\mathrm{d}\vec{\textbf{v}}\\
+			&+\int_0^d[\int_0^\infty\exp(-\frac{1}{v_x\uptau_{c}}|x-x'|)\mathrm{d}\vec{\textbf{v}}]\frac{\mathrm{d}\beta}{\mathrm{d}x'}\mathrm{sgn}(x-x')\bar{n}_m\mathrm{d}x'\\
+			&+\int_0^d\int_0^\infty\beta[\frac{1}{v_x\uptau_c}+\delta(x')+\delta(d-x')-2\delta(x-x')]\exp(-\frac{1}{v_x\uptau_{c}}|x-x'|)\mathrm{d}\vec{\textbf{v}}\bar{n}_m\mathrm{d}x'\\
+			&+\int_0^d\int_0^\infty\frac{1}{v_x\uptau_m}\exp(-\frac{1}{v_x\uptau_{c}}|x-x'|)\mathrm{d}\vec{\textbf{v}}\bar{n}_m\mathrm{d}x'\\
+		\end{aligned}
+	\end{equation}
+	因为$n_m=n_m^0+\delta n_m$，故：
+	\begin{equation}\label{eq:6}
+	\begin{aligned}
+		 n_m(x,v_x>0)=&C_0^>\exp(-\frac{1}{v_x\uptau_c}x)\\
+			&+pn^0_m[1-\exp(-\frac{1}{v_x\uptau_c}x)]\\
+			&+(1-p)\bar{n}^0_m[1-\exp(-\frac{1}{v_x\uptau_c}x)]\\
+			&+\int_0^x\frac{\mathrm{d}\beta}{\mathrm{d}x'}\exp[-\frac{1}{v_x\uptau_{c}}(x-x')]\delta\bar{n}_m\mathrm{d}x'\\
+			&+\int_0^x\beta[\frac{1}{v_x\uptau_c}+\delta(x')-\delta(x-x')]\exp[-\frac{1}{v_x\uptau_{c}}(x-x')]\delta\bar{n}_m\mathrm{d}x'\\
+			&+\int_0^x\frac{1}{v_x\uptau_m}\exp[-\frac{1}{v_x\uptau_{c}}(x-x')]\delta\bar{n}_m\mathrm{d}x'\\
+	\end{aligned}
+	\end{equation}
+	\begin{equation}\label{eq:7}
+	\begin{aligned}
+		n_m(x,v_x<0)=&C_0^<\exp[\frac{1}{v_x\uptau_c}(d-x)]\\
+			&+pn^0_m\{1-\exp[\frac{1}{v_x\uptau_c}(d-x)]\}\\
+			&+(1-p)\bar{n}^0_m\{1-\exp[\frac{1}{v_x\uptau_c}(d-x)]\}\\
+			&-\int_x^d\frac{\mathrm{d}\beta}{\mathrm{d}x'}\exp[-\frac{1}{v_x\uptau_{c}}(x-x')]\delta\bar{n}_m\mathrm{d}x'\\
+			&-\int_x^d\beta[\frac{1}{v_x\uptau_c}+\delta(x-x')-\delta(d-x')]\exp[-\frac{1}{v_x\uptau_{c}}(x-x')]\delta\bar{n}_m\mathrm{d}x'\\
+			&-\int_x^d\frac{1}{v_x\uptau_m}\exp[-\frac{1}{v_x\uptau_{c}}(x-x')]\delta\bar{n}_m\mathrm{d}x'\\
+	\end{aligned}
+	\end{equation}
+	从而：
+	\begin{equation}\label{eq:8}
+		\begin{aligned}
+			\int_{-\infty}^{\infty}n_m\mathrm{d}\vec{\textbf{v}}=&\int_0^\infty \{(C_0^>+\frac{\mathrm{d}\beta}{\mathrm{d}x'}\delta\bar{n}_m(0^-))\exp(-\frac{1}{v_x\uptau_c}x)+C_0^<\exp[-\frac{1}{v_x\uptau_c}(d-x)]\}\mathrm{d}\vec{\textbf{v}}\\
+			&+\int_0^\infty pn^0_m\{2-\exp(-\frac{1}{v_x\uptau_c}x)-\exp[-\frac{1}{v_x\uptau_c}(d-x)]\}\mathrm{d}\vec{\textbf{v}}\\
+			&+\int_0^\infty (1-p)\bar{n}^0_m\{2-\exp(-\frac{1}{v_x\uptau_c}x)-\exp[-\frac{1}{v_x\uptau_c}(d-x)]\}\mathrm{d}\vec{\textbf{v}}\\
+			&+\int_0^d\int_0^\infty\beta[\frac{1}{v_x\uptau_c}+\delta(x')+\delta(d-x')-2\delta(x-x')]\exp(-\frac{1}{v_x\uptau_{c}}|x-x'|)\mathrm{d}\vec{\textbf{v}}\delta\bar{n}_m\mathrm{d}x'\\
+			&+\int_0^d\int_0^\infty\frac{1}{v_x\uptau_m}\exp(-\frac{1}{v_x\uptau_{c}}|x-x'|)\mathrm{d}\vec{\textbf{v}}\delta\bar{n}_m\mathrm{d}x'\\
+		\end{aligned}
+	\end{equation}
+	边界条件为:
+	\begin{equation}\label{eq:9}
+	\begin{aligned}
+	&\delta n_m(0,v_x>0)=g(v_x)+R(v_x)\cdot \delta n_m(0,v'_x<0)	\\
+	&n_m(0,v_x<0)=\sum T(v_x)\cdot n_m(0,v_x<0)\\
+	&n_m(d,v_x<0)=T'(v_x)\cdot g'(v_x)+R'(v_x)\cdot n_m(d,v'_x>0)
+	\end{aligned}
+	\end{equation}
+	不妨令$v_x=-v'_x$，将边界条件带入式\eqref{eq:6}\eqref{eq:7}可得：
+	\begin{equation}\label{eq:10}
+		\begin{aligned}
+		C_0^>=&g\\
+			&+RC_0^<\exp(-\frac{1}{v_x\uptau_c}d)\\
+			&+R\cdot pn^0_m[1-\exp(-\frac{1}{v_x\uptau_c}d)]\\
+			&+R\cdot (1-p)\bar{n}^0_m[1-\exp(-\frac{1}{v_x\uptau_c}d)]\\
+			&-R\int_0^d\frac{\mathrm{d}\beta}{\mathrm{d}x'}\exp(-\frac{1}{v_x\uptau_{c}}x')\delta\bar{n}_m\mathrm{d}x'\\
+			&+R\int_0^d\beta[\frac{1}{v_x\uptau_c}-\delta(x')+\delta(d-x')]\exp(-\frac{1}{v_x\uptau_{c}}x')\delta\bar{n}_m\mathrm{d}x'\\
+			&+R\int_0^d\frac{1}{v_x\uptau_m}\exp(-\frac{1}{v_x\uptau_{c}}x')\delta\bar{n}_m\mathrm{d}x'\\			
+		\end{aligned}
+	\end{equation}
+	\begin{equation}\label{eq:11}
+		\begin{aligned}
+		C_0^<=&T'\cdot g'\\
+			&+R'C_0^>\exp(-\frac{1}{v_x\uptau_c}d)\\
+			&+R'\cdot pn^0_m[1-\exp(-\frac{1}{v_x\uptau_c}d)]\\
+			&+R'\cdot (1-p)\bar{n}^0_m[1-\exp(-\frac{1}{v_x\uptau_c}d)]\\
+			&+R'\int_0^d\frac{\mathrm{d}\beta}{\mathrm{d}x'}\exp[-\frac{1}{v_x\uptau_{c}}(d-x')]\delta\bar{n}_m\mathrm{d}x'\\
+			&+R'\int_0^d\beta[\frac{1}{v_x\uptau_c}+\delta(x')-\delta(d-x')]\exp[-\frac{1}{v_x\uptau_{c}}(d-x')]\delta\bar{n}_m\mathrm{d}x'\\
+			&+R'\int_0^d\frac{1}{v_x\uptau_m}\exp[-\frac{1}{v_x\uptau_{c}}(d-x')]\delta\bar{n}_m\mathrm{d}x'\\			
+		\end{aligned}
+	\end{equation}
+	先令$C_0^<=0$，假设$T(v_x),R(v_x),T'(v_x),R'(v_x)$都为常数,且$T(v_x)=1$，然后将$C_0^>$代回式\eqref{eq:8}
+	\begin{equation}\label{eq:12}
+		\begin{aligned}
+			\int_{-\infty}^{\infty}\delta n_m\mathrm{d}\vec{\textbf{v}}=&\int_0^\infty [g(v_x)+R\frac{\mathrm{d}\beta}{\mathrm{d}x'}\delta\bar{n}_m(0^-)]\exp(-\frac{1}{v_x\uptau_c}x)\mathrm{d}\vec{\textbf{v}}\\
+			&+\int_0^\infty pn^0_m\{R\exp(-\frac{1}{v_x\uptau_c}x)-\exp(-\frac{1}{v_x\uptau_c}x)\}\mathrm{d}\vec{\textbf{v}}\\
+			&+\int_0^\infty (1-p)\bar{n}^0_m\{R\exp(-\frac{1}{v_x\uptau_c}x)-\exp(-\frac{1}{v_x\uptau_c}x)\}\mathrm{d}\vec{\textbf{v}}\\
+			&+R\int_0^d\int_0^\infty\beta[\frac{1}{v_x\uptau_c}-\delta(x')]\exp[-\frac{1}{v_x\uptau_{c}}(x+x')]\mathrm{d}\vec{\textbf{v}}\delta\bar{n}_m\mathrm{d}x'\\
+			&+R\int_0^d\int_0^\infty\frac{1}{v_x\uptau_m}\exp[-\frac{1}{v_x\uptau_{c}}(x+x')]\mathrm{d}\vec{\textbf{v}}\delta\bar{n}_m\mathrm{d}x'\\
+			&+\int_0^d\int_0^\infty\beta[\frac{1}{v_x\uptau_c}+\delta(x')-2\delta(x-x')]\exp(-\frac{1}{v_x\uptau_{c}}|x-x'|)\mathrm{d}\vec{\textbf{v}}\delta\bar{n}_m\mathrm{d}x'\\
+			&+\int_0^d\int_0^\infty\frac{1}{v_x\uptau_m}\exp(-\frac{1}{v_x\uptau_{c}}|x-x'|)\mathrm{d}\vec{\textbf{v}}\delta\bar{n}_m\mathrm{d}x'\\
+		\end{aligned}
+		\end{equation}
+得矩阵方程：
+	\begin{equation}\label{eq:13}
+		\begin{pmatrix}
+			\delta\bar{n}_m(0)\\ \vdots\\ \delta\bar{n}_m(x)\\ \vdots \\ \delta\bar{n}_m(\infty)
+		\end{pmatrix}
+		=
+		\begin{pmatrix}
+			f_{ak}(0,0)&\dots&f_{ak}(0,x')&\dots&f_{ak}(0,\infty)\\
+			\vdots&\ddots&\vdots&\ddots&\vdots\\
+			f_{ak}(x,0)&\dots&f_{ak}(x,x')&\dots&f_{ak}(x,\infty)\\
+			\vdots&\ddots&\vdots&\ddots&\vdots\\
+			f_{ak}(\infty,0)&\dots&f_{ak}(\infty,x')&\dots&f_{ak}(\infty,\infty)\\
+		\end{pmatrix}
+		\begin{pmatrix}
+			\delta\bar{n}_m(0)\\ \vdots\\ \delta\bar{n}_m(x')\\ \vdots \\ \delta\bar{n}_m(\infty)
+		\end{pmatrix}
+		+
+		\begin{pmatrix}
+			S(0)\\ \vdots\\S(x)\\ \vdots\\S(\infty)
+		\end{pmatrix}
+	\end{equation}
+	由此可利用程序算出$\delta\bar n_m(x)$的数值解.
+	
+\end{document}
