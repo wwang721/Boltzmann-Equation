@@ -1,34 +1,46 @@
+#define Pi 3.1415926535
+
 //可改变的常量
-#define Up 1e6	//积分上限
-#define Low 0	//积分下限
+#define Temperature 300.0 //Temperature
 
-#define th 1e-11
-#define tm 1e-11
+#define Up 3.1415926535 //积分上限
+#define Low 1.0e-4	//积分下限
 
-#define Nm_0 0
+#define tc 1.0e-9
 
-#define c1 1e9
-#define c2 0
+#define vm 5.5e9   //单位：μm/s
 
-#define sigma 1 //正态分布方差
+#define c2 0.0
 
-#define distance 40 //单位：μm
+#define distance 80.0 //单位：μm
 
-#define Mu 1e-6 //微米数量级
+double sgn(double x);	//阶跃函数
 
-#define intvx 2e6 //对Vx的积分
+double nm0(double aq);
+double g_injection(double aq, double R, int injectionmode);
 
-double s1_integrand(double v, double x, double v0);
-double fak_integrand1(double v, double x, double xp, double beta);
-double fak_integrand2(double v, double beta);
-double fak_integrand3(double v, double x, double beta);
-double fak_integrand4(double v, double x, double beta);
+double S_integrand(double aq, double x, double R, int injectionmode);
+double fak_integrand_relax(double aq, double x, double xp, double R);
+double fak_integrand_Beta(double aq, double x, double xp, double Beta, double R);
+double fak_integrand_dBeta(double aq, double x, double xp, int j, double dBeta[], double R);
+double fak_integrand1(double aq, double Beta);
+double fak_integrand2(double aq, double x, double Beta, double R);
 
-void s1_vector(double x[], double s1[], int n, double v0); 
-void fak_matrix(double x[], double w[], double **fak, int n, double beta, int k);
-double vxNm1(double v, int i, double x[], double Nmb[], double v0, double beta);
-double vxNm2(double v, int i, int n, double x[], double Nmb[], double beta);
-void jm_vector(double x[], double jm[], double Nmb[], int n, double v0, double beta, int k);
+
+void S_vector(double x[], double S[], int n, double R, int injectionmode);  
+void fak_relax(double x[], double w[], double **fak, int n, double R);
+void fak_Beta(double x[], double w[], double **fak, int n, double Beta, double R);
+void fak_dBeta(double x[], double w[], double **fak, int n, double dBeta[], double R);
+void fak_matrix(double x[], double w[], double **fak, int n, double Beta, double dBeta[], double R);
+
+void Nmb_vector(double x[], double S[], double **fak, double Nmb[], int n, double Beta, double dBeta[], double R, int injectionmode,int k);
+
+double Nm(double aq, int i, int n, double x[], double w[], double Nmb[], double Beta, double dBeta[], int injectionmode, double R);
+void Nm_3D(double x[], double w[], double Nmb[], int n, double Beta, double dBeta[], int injectionmode, double R, int k);
+
+double aqNm(double aq, int i, int n, double x[], double w[], double Nmb[], double Beta, double dBeta[], int injectionmode, double R);
+void jm_vector(double x[], double w[], double jm[], double Nmb[], int n, double Beta, double dBeta[], int injectionmode, double R, int k);
+//jm
 //以上是自己定义的
 
 void ludcmp(double **a, int n, int *indx, double *d);
