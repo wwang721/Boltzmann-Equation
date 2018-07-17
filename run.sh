@@ -3,14 +3,12 @@
 cd `dirname $0`
 
 #compile the cpp file 
-g++ -c Boltzmann.cpp 
-ar rcs libBoltzmann.a Boltzmann.o
-g++ -o test main.cpp -L. -lBoltzmann -lnrutil
+make
 
 #Determine whether the directory exists.
 if [ ! -d "./data" ];then
 	mkdir ./data
-	echo "The new directory <data> has been set up."
+	echo "A new directory <data> has been set up."
 else
 	echo "The directory <data> exists."
 fi
@@ -19,7 +17,7 @@ fi
 cp test ./data 
 rm test
 cd ./data
-./test 
+nohup ./test > test.log 2>&1 &
 
 
 
