@@ -1,22 +1,16 @@
-all:test
+all:./bin/test
 
-test:main.cpp libBoltzmann.a libnrutil.a
-	@g++ -o test main.cpp -L. -lBoltzmann -lnrutil
+./bin/test:./main/*.o ./lib/lib*.a 
+	@g++ -o ./bin/test ./main/*.o ./lib/lib*.a
 
-libBoltzmann.a:Boltzmann.o
-	@ar rcs libBoltzmann.a Boltzmann.o
+./main/*.o:./main/*.cpp 
+	@cd main;g++ -c *.cpp -I../inc 
 
-Boltzmann.o:Boltzmann.cpp
-	@g++ -c Boltzmann.cpp
-
-libnrutil.a:nrutil.o Integ.o
-	@ar rcs libnrutil.a nrutil.o Integ.o
-
-nrutil.o:nrutil.cpp
-	@g++ -c nrutil.cpp
-
-Integ.o:Integ.cpp
-	@g++ -c Integ.cpp
+./lib/lib*.a:./src/*.cpp
+	@cd ./src;g++ -c *.cpp -I../inc
+	@cd ./src;for name in `ls *.o`;do libname=lib$${name%.*}.a;ar rcs ../lib/$${libname} $${name};done
+	@rm -f ./src/*.o
 
 clean:
-	@rm -rf *.o *.a test
+	@rm -f */*.o */*.a bin/*
+
