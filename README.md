@@ -2,7 +2,7 @@
 
 I'm a college student majoring in physics.
 
-Currently, I am doing some simple work under my professor Mr.Zhang.
+Currently, I am doing some simple work under my professor Zhang.
 
 Here is
 
